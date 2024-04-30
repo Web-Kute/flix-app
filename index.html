@@ -5,6 +5,8 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/png" sizes="16x16" href="favicon.ico">
+<!-- <link rel="icon" type="image/png" sizes="16x16" href="https://weekub.fr/favicon.ico"> -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet" />
@@ -13,7 +15,7 @@
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/spinner.css" />
   <script src="lib/swiper.js"></script>
-  <script src="js/script.js" defer></script>
+  <script type="module" src="./index.js" defer></script>
   <title>Flixx</title>
 </head>
 
@@ -59,9 +61,9 @@
         <!-- movies and shows radio box -->
         <div class="search-radio">
           <input type="radio" id="movie" name="type" value="movie" checked />
-          <label for="movies">Movies</label>
+          <label for="movie">Movies</label>
           <input type="radio" id="tv" name="type" value="tv" />
-          <label for="shows">TV Shows</label>
+          <label for="tv">TV Shows</label>
         </div>
         <div class="search-flex">
           <input type="text" name="search-term" id="search-term" placeholder="Enter search term" />
@@ -76,11 +78,11 @@
   <!-- Popular Movies -->
   <section class="container">
     <h2>Popular Movies</h2>
-    <nav>
+    <!-- <nav>
       <button id="popular-vote-btn-smaller" class="btn">Top votes</button>
       <button id="popular-vote-btn-shuffle" class="btn">Shuffle votes</button>
       <button id="popular-vote-btn-bigger" class="btn">Smaller votes</button>
-    </nav>
+    </nav> -->
     <div id="popular-movies" class="grid"></div>
   </section>
 
