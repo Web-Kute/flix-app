@@ -24,6 +24,29 @@ a {
   text-decoration: none;
 }
 
+button {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  background-color: transparent;
+  outline: 0;
+  padding: 0;
+  cursor: pointer;
+}
+button:focus-visible {
+  outline: 2px dotted currentColor;
+  outline-offset: 3px;
+}
+
+nav {
+width: 40%;
+  display: flex;
+  justify-content: space-around;
+  margin: 20px auto;
+
+}
+
 ul {
   list-style: none;
 }
