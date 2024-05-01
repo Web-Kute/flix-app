@@ -1,10 +1,35 @@
 import { fetchAPIData } from './fetchapi.js';
 
 export async function displayMovieDetails(id) {
-  const movieDetails = document.getElementById('movie-details');
   const movieId = window.location.search.split('id=')[1];
 
   const movie = await fetchAPIData(`movie/${movieId}`);
+
+  // overlay details
+  displayBackgroundImage('movie', movie.backdrop_path);
+
+  const movieDetails = document.getElementById('movie-details');
+  const showDetails = document.getElementById('show-details');
+
+  function displayBackgroundImage(type, imagePath) {
+    const overlay = document.createElement('div');
+    overlay.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${imagePath})`;
+    overlay.style.backgroundSize = 'cover';
+    overlay.style.position = 'absolute';
+    overlay.style.backgroundPosition = 'center';
+    overlay.style.top = 0;
+    overlay.style.left = 0;
+    overlay.style.width = '100vw';
+    overlay.style.height = '100vh';
+    overlay.style.zIndex = -1;
+    overlay.style.opacity = 0.1;
+    if (type === 'movie') {
+      document.body.appendChild(overlay);
+    } else if (type === 'show') {
+      document.getElementById('show-details').appendChild(overlay);
+    }
+  }
+
   movieDetails.innerHTML = `<div class="details-top">
     <div>
       ${
@@ -52,8 +77,9 @@ export async function displayMovieDetails(id) {
       ${movie.production_companies.map((company) => `<li>${company.name}</li>`).join('')}
     </ul>
   </div>`;
+}
 
-function numberWithCommas(x) {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-}
-}
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
