@@ -1,8 +1,9 @@
 import { shuffle } from './js/shuffle.js';
+import { fetchAPIData } from './js/fetchapi.js';
 import { displayPopularMovies } from './js/movies.js';
 import { displayPopularShows } from './js/shows.js';
 import { displayMovieDetails } from './js/movie-details.js';
-import { fetchAPIData } from './js/fetchapi.js';
+import { displayShowDetails } from './js/show-details.js';
 
 const global = {
   currentPage: window.location.pathname,
@@ -22,7 +23,7 @@ async function init() {
       displayMovieDetails();
       break;
     case '/tv-details.html':
-      console.log('TV Details');
+      displayShowDetails();
       break;
     case '/search.html':
       console.log('Search');
