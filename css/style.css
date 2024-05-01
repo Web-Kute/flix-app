@@ -40,11 +40,15 @@ button:focus-visible {
 }
 
 nav {
-width: 40%;
+  width: 40%;
   display: flex;
   justify-content: space-around;
   margin: 20px auto;
+}
 
+.swiper-button-next,
+.swiper-button-prev {
+  color: var(--color-secondary);
 }
 
 ul {
