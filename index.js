@@ -4,7 +4,6 @@ import { displayPopularMovies } from './js/movies.js';
 import { displayPopularShows } from './js/shows.js';
 import { displayMovieDetails } from './js/movie-details.js';
 import { displayShowDetails } from './js/show-details.js';
-import { displaySlider } from "./js/swiper-slider.js";
 
 const global = {
   currentPage: window.location.pathname,

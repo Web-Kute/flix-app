@@ -21,7 +21,6 @@ export async function displaySlider() {
   });
 }
 
-displaySlider();
 function initSwiper() {
   const swiper = new Swiper('.swiper', {
     slidesPerView: 1,
@@ -50,3 +49,5 @@ function initSwiper() {
     },
   });
 }
+
+displaySlider()
