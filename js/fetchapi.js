@@ -19,7 +19,6 @@ export async function fetchAPIData(endpoint) {
     `${API_URL}${endpoint}?api_key=${API_KEY}&language=fr-FR&page=${randomPages !== null ? randomPages : 1}`
   );
   const data = await response.json();
-  console.log(response, data.page);
   hideSpinner();
   return data;
 }
