@@ -24,7 +24,7 @@ export async function displaySlider() {
 function initSwiper() {
   const swiper = new Swiper('.swiper', {
     slidesPerView: 1,
-    spaceBewteen: 30,
+    spaceBewteen: 10,
     centeredSlides: true,
     freeMode: true,
     loop: true,
@@ -33,7 +33,7 @@ function initSwiper() {
       prevEl: '.swiper-button-prev',
     },
     autoplay: {
-      delay: 4000,
+      delay: 2500,
       disableOnInteraction: false,
     },
     breakpoints: {
