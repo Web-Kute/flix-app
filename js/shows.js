@@ -4,7 +4,7 @@ const popularShows = document.getElementById('popular-shows');
 // Display 20 most popular tv shows
 export async function displayPopularShows() {
   const { results } = await fetchAPIData('tv/popular');
-  results.forEach((show) => {
+  results.map((show) => {
     popularShows.innerHTML += `
     <div class="card">
       <a href="tv-details.html?id=${show.id}">

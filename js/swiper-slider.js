@@ -5,7 +5,7 @@ export async function displaySlider() {
 
   const slider = document.querySelector('.swiper-wrapper');
 
-  results.forEach((movie) => {
+  results.map((movie) => {
     slider.innerHTML += `<div class="swiper-slide">
         <a href="movie-details.html?id=${movie.id}">
           <img
