@@ -20,8 +20,11 @@ export async function search() {
   global.search.term = urlParams.get('search-term');
 
   if (global.search.term !== '' && global.search.term !== null) {
-    const { results, total_pages, page } = await searchAPIData();
+    const { results, total_pages, page, total_results } = await searchAPIData();
     const resultsContainer = document.getElementById('search-results');
+    global.search.page = page;
+    global.search.totalPages = total_pages;
+    global.search.totalResults = total_results;
 
     if (results.length === 0) {
       showAlert('No results found', 'alert-warning');
@@ -45,6 +48,7 @@ export async function search() {
 
 function displaySearchResults(results) {
   const resultsContainer = document.getElementById('search-results');
+  const searchResults = document.getElementById('search-results-heading');
   const radioType = document.querySelector(`input[name="type"]`);
   const radioMovie = document.querySelector('input[value="movie"]');
   const radioTv = document.querySelector('input[value="tv"]');
@@ -84,5 +88,16 @@ function displaySearchResults(results) {
           </p>
         </div>
       </div>`;
+    searchResults.innerHTML = `${results.length} results of ${global.search.totalResults} ${global.search.type === 'movie' ? 'movies' : 'shows'} found`;
   });
+  displayPagination();
+}
+
+function displayPagination() {
+  const div = document.createElement('div');
+  div.className = 'pagination';
+  div.innerHTML = `<button class="btn btn-primary" id="prev">Prev</button>
+        <button class="btn btn-primary" id="next">Next</button>
+        <div class="page-counter">Page${global.search.page} of ${global.search.totalPages}</div>`;
+  document.getElementById('pagination').appendChild(div);
 }

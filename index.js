@@ -12,7 +12,8 @@ export const global = {
     term: '',
     type: '',
     page: 1,
-    totalPages: 10,
+    totalPages: 1,
+    totalResults: 0,
   },
   api: {
     key: 'f52b3a868de5d7fcd5533c09cd6598b9',
