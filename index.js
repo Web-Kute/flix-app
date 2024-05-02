@@ -19,9 +19,9 @@ export const global = {
     url: 'https://api.themoviedb.org/3/',
   },
 };
-
+const spinner = document.querySelector('.spinner');
 // Init App
-async function init() {
+export async function init() {
   switch (global.currentPage) {
     case '/':
     case '/index.html':
@@ -44,6 +44,12 @@ async function init() {
 }
 init();
 
+export function showSpinner() {
+  spinner.classList.add('show');
+}
+export function hideSpinner() {
+  spinner.classList.remove('show');
+}
 // Highlight active link
 function HighlightActiveLink() {
   const links = document.querySelectorAll('.nav-link');

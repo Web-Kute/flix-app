@@ -1,14 +1,14 @@
-import { global } from '../index.js';
+import { global, showSpinner, hideSpinner } from '../index.js';
 
 export async function searchAPIData() {
   const API_KEY = global.api.key;
   const API_URL = global.api.url;
-  // showSpinner();
+  showSpinner();
   const response = await fetch(
     `${API_URL}search/${global.search.type}?api_key=${API_KEY}&language=fr-FR&query=${global.search.term}`
   );
   const data = await response.json();
-  // hideSpinner();
+  hideSpinner();
   return data;
 }
 
