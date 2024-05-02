@@ -4,9 +4,16 @@ import { displayPopularMovies } from './js/movies.js';
 import { displayPopularShows } from './js/shows.js';
 import { displayMovieDetails } from './js/movie-details.js';
 import { displayShowDetails } from './js/show-details.js';
+import { search } from './js/search.js';
 
-const global = {
+export const global = {
   currentPage: window.location.pathname,
+  search: {
+    term: '',
+    type: '',
+    page: 1,
+    totalPages: 10,
+  },
 };
 
 // Init App
@@ -26,7 +33,7 @@ async function init() {
       displayShowDetails();
       break;
     case '/search.html':
-      console.log('Search');
+      search();
       break;
   }
   HighlightActiveLink();

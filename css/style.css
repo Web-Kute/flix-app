@@ -374,3 +374,7 @@ section h2 {
 .alert-error {
   background: red;
 }
+
+.alert-warning {
+  background: tomato;
+}
