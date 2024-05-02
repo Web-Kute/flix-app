@@ -41,21 +41,21 @@ AddOutputFilterByType DEFLATE application/x-javascript
 
 # Security Headers
 <IfModule mod_headers.c>
-    # Header set X-XSS-Protection "1; mode=block";
-    # Header set X-Frame-Options "SAMEORIGIN";
-    # Header set X-Content-Type-Options "nosniff";
-    # Header always set Strict-Transport-Security "max-age=63072000" env=HTTPS;
-    # Header set Referrer-Policy "same-origin";
-    # Header set Feature-Policy "geolocation 'self'";
-    # Header always edit Set-Cookie (.*) "$1; HTTPOnly; Secure";
-  # CSP
-    # Header set Content-Security-Policy "default-src 'self'";
-    # Header set Content-Security-Policy "script-src 'strict-dynamic' 'nonce-sha256-Q//i3Oe/cA3wzPXbDxqE1z32DjLBD9fe4StbxzEiG6E=' 'unsafe-inline' http: https:";
-    # Header set Content-Security-Policy "object-src 'none'";
-    # Header set Content-Security-Policy "base-uri 'none'";
-    # Header set Content-Security-Policy "require-trusted-types-for 'script'";
-    # Header set Content-Security-Policy "report-uri https://weekub.fr";
-    # Header set Content-Security-Policy "style-src 'self' 'unsafe-inline' 'unsafe-eval' 'strict-dynamic'";
+    Header set X-XSS-Protection "1; mode=block";
+    Header set X-Frame-Options "SAMEORIGIN";
+    Header set X-Content-Type-Options "nosniff";
+    Header always set Strict-Transport-Security "max-age=63072000" env=HTTPS;
+    Header set Referrer-Policy "same-origin";
+    Header set Feature-Policy "geolocation 'self'";
+    Header always edit Set-Cookie (.*) "$1; HTTPOnly; Secure";
+  CSP
+    Header set Content-Security-Policy "default-src 'self'";
+    Header set Content-Security-Policy "script-src 'strict-dynamic' 'nonce-sha256-Q//i3Oe/cA3wzPXbDxqE1z32DjLBD9fe4StbxzEiG6E=' 'unsafe-inline' http: https:";
+    Header set Content-Security-Policy "object-src 'none'";
+    Header set Content-Security-Policy "base-uri 'none'";
+    Header set Content-Security-Policy "require-trusted-types-for 'script'";
+    Header set Content-Security-Policy "report-uri https://weekub.fr";
+    Header set Content-Security-Policy "style-src 'self' 'unsafe-inline' 'unsafe-eval' 'strict-dynamic'";
 </IfModule>
 
 # Redirection to HTTPS
