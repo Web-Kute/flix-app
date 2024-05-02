@@ -14,6 +14,10 @@ export const global = {
     page: 1,
     totalPages: 10,
   },
+  api: {
+    key: 'f52b3a868de5d7fcd5533c09cd6598b9',
+    url: 'https://api.themoviedb.org/3/',
+  },
 };
 
 // Init App
