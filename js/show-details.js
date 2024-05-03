@@ -1,4 +1,4 @@
-import { hightLight } from '../index.js';
+import { hightLightMenu } from '../index.js';
 import { fetchAPIData } from './fetchapi.js';
 
 export async function displayShowDetails(id) {
@@ -83,5 +83,5 @@ export async function displayShowDetails(id) {
             })
             .join(', ')}
   </div>`;
-  hightLight('tv');
+  hightLightMenu('tv');
 }

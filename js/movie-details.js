@@ -1,4 +1,4 @@
-import { hightLight } from '../index.js';
+import { hightLightMenu } from '../index.js';
 import { fetchAPIData } from './fetchapi.js';
 
 export async function displayMovieDetails(id) {
@@ -85,7 +85,7 @@ export async function displayMovieDetails(id) {
         })
         .join(', ')}
   </div>`;
-  hightLight('movie');
+  hightLightMenu('movie');
 }
 
 function numberWithCommas(x) {
