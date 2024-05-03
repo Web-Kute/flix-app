@@ -5,6 +5,7 @@ import { shuffle } from './shuffle.js';
 export async function displayPopularMovies() {
   const popularMovies = document.getElementById('popular-movies');
   const { results } = await fetchAPIData('movie/popular');
+console.log('Movies: ', results, popularMovies);
   results.map((movie) => {
     popularMovies.innerHTML += `
     <div class="card">
