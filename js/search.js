@@ -5,7 +5,7 @@ export async function searchAPIData() {
   const API_URL = global.api.url;
   showSpinner();
   const response = await fetch(
-    `${API_URL}search/${global.search.type}?api_key=${API_KEY}&language=fr-FR&query=${global.search.term}`
+    `${API_URL}search/${global.search.type}?api_key=${API_KEY}&language=fr-FR&query=${global.search.term}&page=${global.search.page}`
   );
   const data = await response.json();
 
@@ -49,6 +49,7 @@ export async function search() {
 function displaySearchResults(results) {
   const resultsContainer = document.getElementById('search-results');
   const searchResults = document.getElementById('search-results-heading');
+  const pagination = document.getElementById('pagination');
   const radioType = document.querySelector(`input[name="type"]`);
   const radioMovie = document.querySelector('input[value="movie"]');
   const radioTv = document.querySelector('input[value="tv"]');
@@ -63,6 +64,11 @@ function displaySearchResults(results) {
       : radioMovie.removeAttribute('checked');
 
   radioType.addEventListener('change', () => selectTypeTv != selectTypeMovie);
+
+  // Clear previous results
+  resultsContainer.innerHTML = '';
+  searchResults.innerHTML = '';
+  pagination.innerHTML = '';
 
   results.map((result) => {
     resultsContainer.innerHTML += `<div class="card">
@@ -98,6 +104,33 @@ function displayPagination() {
   div.className = 'pagination';
   div.innerHTML = `<button class="btn btn-primary" id="prev">Prev</button>
         <button class="btn btn-primary" id="next">Next</button>
-        <div class="page-counter">Page${global.search.page} of ${global.search.totalPages}</div>`;
-  document.getElementById('pagination').appendChild(div);
+        <div class="page-counter">Page ${global.search.page} of ${global.search.totalPages}</div>`;
+  pagination.appendChild(div);
+
+  const nextBtn = document.getElementById('next');
+  const prevBtn = document.getElementById('prev');
+
+  // Disable prev button on first page
+  if (global.search.page === 1) {
+    prevBtn.disabled = true;
+  }
+
+  // Disable next button on last page
+  if (global.search.page === global.search.totalPages) {
+    nextBtn.disabled = true;
+  }
+
+  nextBtn.addEventListener('click', async () => {
+    global.search.page += 1;
+    const { results, total_pages } = await searchAPIData();
+    displaySearchResults(results);
+  });
+
+  prevBtn.addEventListener('click', async () => {
+    if (global.search.page >1) {
+      global.search.page -= 1;
+    }
+    const { results, total_pages } = await searchAPIData();
+    displaySearchResults(results);
+  });
 }
