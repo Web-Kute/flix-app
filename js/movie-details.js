@@ -1,9 +1,11 @@
+import { hightLight } from '../index.js';
 import { fetchAPIData } from './fetchapi.js';
 
 export async function displayMovieDetails(id) {
   const movieId = window.location.search.split('id=')[1];
 
   const movie = await fetchAPIData(`movie/${movieId}`);
+  const { cast } = await fetchAPIData(`movie/${movieId}/credits`);
 
   // overlay details
   displayBackgroundImage('movie', movie.backdrop_path);
@@ -76,10 +78,16 @@ export async function displayMovieDetails(id) {
     <ul class="list-group">
       ${movie.production_companies.map((company) => `<li>${company.name}</li>`).join('')}
     </ul>
+    <h4>Cast</h4>
+      ${cast
+        .map((casting) => {
+          return `<span>${casting.name}</span>`;
+        })
+        .join(', ')}
   </div>`;
+  hightLight('movie');
 }
 
-  function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  }
-
+function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}

@@ -60,3 +60,9 @@ function HighlightActiveLink() {
     }
   });
 }
+export function hightLight(type) {
+  const links = document.querySelectorAll('.nav-link');
+  links.forEach((link) => {
+    link.dataset.link === type ? link.classList.add('active') : null;
+  });
+}

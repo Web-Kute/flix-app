@@ -65,6 +65,15 @@ function displaySearchResults(results) {
 
   radioType.addEventListener('change', () => selectTypeTv != selectTypeMovie);
 
+  function hightLight() {
+    const links = document.querySelectorAll('.nav-link');
+    links.forEach((link) => {
+      link.dataset.link === global.search.type
+        ? link.classList.add('active')
+        : null;
+    });
+  }
+  hightLight();
   // Clear previous results
   resultsContainer.innerHTML = '';
   searchResults.innerHTML = '';
@@ -127,7 +136,7 @@ function displayPagination() {
   });
 
   prevBtn.addEventListener('click', async () => {
-    if (global.search.page >1) {
+    if (global.search.page > 1) {
       global.search.page -= 1;
     }
     const { results, total_pages } = await searchAPIData();

@@ -1,9 +1,11 @@
+import { hightLight } from '../index.js';
 import { fetchAPIData } from './fetchapi.js';
 
 export async function displayShowDetails(id) {
   const showId = window.location.search.split('id=')[1];
 
   const show = await fetchAPIData(`tv/${showId}`);
+  const { cast } = await fetchAPIData(`tv/${showId}/credits`);
 
   // overlay details
   displayBackgroundImage('show', show.backdrop_path);
@@ -54,7 +56,7 @@ export async function displayShowDetails(id) {
       </p>
       <p class="text-muted">First Air Date: ${show.first_air_date}</p>
       <p>
-        ${show.overview !=='' ? show.overview : 'No overview provided.'}
+        ${show.overview !== '' ? show.overview : 'No overview provided.'}
       </p>
       <h5>Genres</h5>
       <ul class="list-group">
@@ -74,5 +76,12 @@ export async function displayShowDetails(id) {
     </ul>
     <h4>Production Companies</h4>
     <ul class="list-group">${show.production_companies.map((company) => `<li>${company.name}</li>`).join('')}</ul>
+    <h4>Cast</h4>
+          ${cast
+            .map((casting) => {
+              return `<span>${casting.name}</span>`;
+            })
+            .join(', ')}
   </div>`;
+  hightLight('tv');
 }
