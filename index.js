@@ -66,4 +66,3 @@ export function hightLightMenu(type) {
     link.dataset.link === type ? link.classList.add('active') : null;
   });
 }
-console.log("Global: ", global);
