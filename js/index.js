@@ -1,10 +1,10 @@
-import { shuffle } from './js/shuffle.js';
-import { fetchAPIData } from './js/fetchapi.js';
-import { displayPopularMovies } from './js/movies.js';
-import { displayPopularShows } from './js/shows.js';
-import { displayMovieDetails } from './js/movie-details.js';
-import { displayShowDetails } from './js/show-details.js';
-import { search } from './js/search.js';
+// import { shuffle } from './js/shuffle.js';
+// import { fetchAPIData } from './js/fetchapi.js';
+import { displayPopularMovies } from './movies.js';
+import { displayPopularShows } from './shows.js';
+import { displayMovieDetails } from './movie-details.js';
+import { displayShowDetails } from './show-details.js';
+import { search } from './search.js';
 
 export const global = {
   currentPage: window.location.pathname,
@@ -20,7 +20,7 @@ export const global = {
     url: 'https://api.themoviedb.org/3/',
   },
 };
-const spinner = document.querySelector('.spinner');
+
 // Init App
 export async function init() {
   switch (global.currentPage) {
@@ -46,10 +46,10 @@ export async function init() {
 init();
 
 export function showSpinner() {
-  spinner.classList.add('show');
+  document.querySelector('.spinner').classList.add('show');
 }
 export function hideSpinner() {
-  spinner.classList.remove('show');
+  document.querySelector('.spinner').classList.remove('show');
 }
 // Highlight active link
 function HighlightActiveLink() {

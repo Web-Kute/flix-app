@@ -1,4 +1,4 @@
-import { hightLightMenu } from '../index.js';
+import { hightLightMenu } from './index.js';
 import { fetchAPIData } from './fetchapi.js';
 
 export async function displayShowDetails(id) {
@@ -39,12 +39,12 @@ export async function displayShowDetails(id) {
               src="https://image.tmdb.org/t/p/w500${show.poster_path}"
               class="card-img-top"
               alt="${show.name}"
-            />`
+            widht="400" height="600">`
         : `<img
-              src="../images/no-image.jpg"
+              src="./images/no-image.jpg"
               class="card-img-top"
               alt="${show.name}"
-            />`
+            widht="400" height="600">`
     }
     </div>
     <div>
@@ -54,13 +54,13 @@ export async function displayShowDetails(id) {
         <i class="fas fa-star text-primary"></i>
         ${show.vote_average.toFixed(1)}
       </p>
-      <p class="text-muted">First Air Date: ${show.first_air_date}</p>
+      <p class="text-muted"><strong>First Air Date:</strong> ${show.first_air_date}</p>
       <p>
         ${show.overview !== '' ? show.overview : 'No overview provided.'}
       </p>
-      <h5>Genres</h5>
+      <h3>Genres</h3>
       <ul class="list-group">
-        ${show.genres.map((genre) => `<li>${genre.name}</li>`).join('')}
+        ${show.genres.map((genre) => `<span>${genre.name}</span>`).join(', ')}
       </ul>
       <a href="#" target="_blank" class="btn">Visit Show Homepage</a>
     </div>
@@ -74,9 +74,9 @@ export async function displayShowDetails(id) {
       </li>
       <li><span class="text-secondary">Status:</span> ${show.status}</li>
     </ul>
-    <h4>Production Companies</h4>
+    <h3>Production Companies</h3>
     <ul class="list-group">${show.production_companies.map((company) => `<li>${company.name}</li>`).join('')}</ul>
-    <h4>Cast</h4>
+    <h3>Cast</h3>
           ${cast
             .map((casting) => {
               return `<span>${casting.name}</span>`;

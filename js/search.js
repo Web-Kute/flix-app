@@ -1,4 +1,4 @@
-import { global, showSpinner, hideSpinner } from '../index.js';
+import { global, showSpinner, hideSpinner } from './index.js';
 
 export async function searchAPIData() {
   const API_KEY = global.api.key;
@@ -80,7 +80,7 @@ function displaySearchResults(results) {
   pagination.innerHTML = '';
 
   results.map((result) => {
-    resultsContainer.innerHTML += `<div class="card">
+    return (resultsContainer.innerHTML += `<div class="card">
       <a href="${global.search.type}-details.html?id=${result.id}">
       ${
         result.poster_path
@@ -102,7 +102,7 @@ function displaySearchResults(results) {
             <small class="text-muted">Release: ${global.search.type === 'movie' ? result.release_date : result.first_air_date}</small>
           </p>
         </div>
-      </div>`;
+      </div>`);
     searchResults.innerHTML = `${results.length} results of ${global.search.totalResults} ${global.search.type === 'movie' ? 'movies' : 'shows'} found`;
   });
   displayPagination();

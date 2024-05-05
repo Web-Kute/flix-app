@@ -7,12 +7,21 @@ export async function displaySlider() {
 
   results.map((movie) => {
     slider.innerHTML += `<div class="swiper-slide">
-        <a href="movie-details.html?id=${movie.id}">
-          <img
-            src="https://image.tmdb.org/t/p/w500${movie.poster_path}"
-            class="card-img-top"
-            alt="${movie.name}">          
-        </a>
+      <a href="movie-details.html?id=${movie.id}">
+      ${
+        movie.poster_path
+          ? `<img
+                src="https://image.tmdb.org/t/p/w500${movie.poster_path}"
+                class="card-img-top"
+                alt="${movie.title}"
+              width="500" height="700">`
+          : `<img
+                src="./images/no-image.jpg"
+                class="card-img-top"
+                alt="${movie.title}"
+              width="500" height="700">`
+      }
+      </a>
         <h4 class="swiper-rating">
           <i class="fas fa-star text-secondary"></i> ${movie.vote_average.toFixed(1)}
         </h4>

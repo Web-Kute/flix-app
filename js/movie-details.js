@@ -1,4 +1,4 @@
-import { hightLightMenu } from '../index.js';
+import { hightLightMenu } from './index.js';
 import { fetchAPIData } from './fetchapi.js';
 
 export async function displayMovieDetails(id) {
@@ -40,12 +40,12 @@ export async function displayMovieDetails(id) {
                 src="https://image.tmdb.org/t/p/w500${movie.poster_path}"
                 class="card-img-top"
                 alt="${movie.title}"
-              />`
+              widht="400" height="600">`
           : `<img
-                src="../images/no-image.jpg"
+                src="./images/no-image.jpg"
                 class="card-img-top"
                 alt="${movie.title}"
-              />`
+              widht="400" height="600">`
       }
     </div>
     <div>
@@ -61,7 +61,7 @@ export async function displayMovieDetails(id) {
       </p>
       <h5>Genres</h5>
       <ul class="list-group">
-        ${movie.genres.map((genre) => `<li>${genre.name}</li>`).join('')}
+        ${movie.genres.map((genre) => `<span>${genre.name}</span>`).join(', ')}
       </ul>
       <a href="#" target="_blank" class="btn">Visit Movie Homepage</a>
     </div>

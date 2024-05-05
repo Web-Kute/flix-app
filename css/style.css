@@ -211,7 +211,7 @@ section.now-playing {
 
 section h2 {
   margin: 20px 0;
-  text-align: center;
+  text-align: start;
   text-transform: uppercase;
 }
 

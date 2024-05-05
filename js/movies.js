@@ -1,12 +1,28 @@
 import { fetchAPIData } from './fetchapi.js';
-import { shuffle } from './shuffle.js';
+const global = {
+  currentPage: window.location.pathname,
+  search: {
+    term: '',
+    type: '',
+    page: 1,
+    totalPages: 1,
+    totalResults: 0,
+  },
+  api: {
+    key: 'f52b3a868de5d7fcd5533c09cd6598b9',
+    url: 'https://api.themoviedb.org/3/',
+  },
+};
 
+if (global.currentPage === '/index.html' || global.currentPage === '/flix-app/') {
+  displayPopularMovies();
+}
 // Display 20 most popular movies
 export async function displayPopularMovies() {
   const popularMovies = document.getElementById('popular-movies');
   const { results } = await fetchAPIData('movie/popular');
   results.map((movie) => {
-    popularMovies.innerHTML += `
+    return (popularMovies.innerHTML += `
     <div class="card">
       <a href="movie-details.html?id=${movie.id}">
       ${
@@ -15,12 +31,12 @@ export async function displayPopularMovies() {
                 src="https://image.tmdb.org/t/p/w500${movie.poster_path}"
                 class="card-img-top"
                 alt="${movie.title}"
-              />`
+              widht="265">`
           : `<img
-                src="../images/no-image.jpg"
+                src="./images/no-image.jpg"
                 class="card-img-top"
                 alt="${movie.title}"
-              />`
+              widht="265">`
       }
       </a>
       <div class="card-body">
@@ -30,6 +46,6 @@ export async function displayPopularMovies() {
           <small class="text-muted">Number of vote: ${movie.vote_count}</small>
         </p>
       </div>
-    </div>`;
+    </div>`);
   });
 }

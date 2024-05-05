@@ -1,5 +1,19 @@
-import { global, showSpinner, hideSpinner } from '../index.js';
+import { showSpinner, hideSpinner } from './index.js';
 
+export const global = {
+  currentPage: window.location.pathname,
+  search: {
+    term: '',
+    type: '',
+    page: 1,
+    totalPages: 1,
+    totalResults: 0,
+  },
+  api: {
+    key: 'f52b3a868de5d7fcd5533c09cd6598b9',
+    url: 'https://api.themoviedb.org/3/',
+  },
+};
 const options = {
   method: 'GET',
   headers: {
@@ -17,7 +31,8 @@ export async function fetchAPIData(endpoint) {
   const API_URL = global.api.url;
   showSpinner();
   const response = await fetch(
-    `${API_URL}${endpoint}?api_key=${API_KEY}&language=fr-FR&page=${randomPages !== null ? randomPages : 1}`, options
+    `${API_URL}${endpoint}?api_key=${API_KEY}&language=fr-FR&page=${randomPages !== null ? randomPages : 1}`,
+    options
   );
   const data = await response.json();
   hideSpinner();
