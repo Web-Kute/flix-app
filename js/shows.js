@@ -1,17 +1,44 @@
 import { fetchAPIData } from './fetchapi.js';
-import { global, highlightActiveLink } from './utils.js';
+import {
+  global,
+  highlightActiveLink,
+  shuffle,
+  urlHash,
+  sortVoteBtn,
+  voteBtnSmaller,
+  voteBtnShuffle,
+  voteBtnBigger,
+} from './utils.js';
 
-const urlPath = global.currentPage.split('/', -2);
-
-if (global.currentPage.split('/', -1)[2] === 'shows.html') {
+if (urlHash === 'shows.html') {
   displayPopularShows();
   highlightActiveLink();
+  sortVoteBtn();
+
+  voteBtnBigger.addEventListener('click', async function () {
+    const { results } = await fetchAPIData('tv/popular');
+    const shows = results.sort((a, b) => a.vote_count - b.vote_count);
+    popularShows.innerHTML = '';
+    displayPopularShows(shows);
+  });
+  voteBtnSmaller.addEventListener('click', async function () {
+    const { results } = await fetchAPIData('tv/popular');
+    const shows = results.sort((a, b) => b.vote_count - a.vote_count);
+    popularShows.innerHTML = '';
+    displayPopularShows(shows);
+  });
+  voteBtnShuffle.addEventListener('click', async function () {
+    const { results } = await fetchAPIData('tv/popular');
+    const shows = shuffle(results);
+    popularShows.innerHTML = '';
+    displayPopularShows(shows);
+  });
 }
+const popularShows = document.getElementById('popular-shows');
 // Display 20 most popular tv shows
-export async function displayPopularShows() {
-  const popularShows = document.getElementById('popular-shows');
-  const { results } = await fetchAPIData('tv/popular');
-  results.map((show) => {
+export async function displayPopularShows(shows) {
+  // const { results } = await fetchAPIData('tv/popular');
+  shows.map((show) => {
     return (popularShows.innerHTML += `
     <div class="card">
       <a href="tv-details.html?id=${show.id}">

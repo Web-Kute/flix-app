@@ -91,6 +91,11 @@ ul {
   color: #000;
 }
 
+.btn.active {
+  background: var(--color-secondary);
+  color: #000;
+}
+
 .btn:disabled {
   border-color: #ccc;
   cursor: not-allowed;

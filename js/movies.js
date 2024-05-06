@@ -1,22 +1,46 @@
 import { fetchAPIData } from './fetchapi.js';
-import { global, highlightActiveLink } from './utils.js';
+import {
+  global,
+  highlightActiveLink,
+  shuffle,
+  urlHash,
+  sortVoteBtn,
+  voteBtnSmaller,
+  voteBtnShuffle,
+  voteBtnBigger,
+} from './utils.js';
 
-const urlPath = global.currentPage.split('/', -2);
-
-if (
-  global.currentPage === urlPath[1] ||
-  global.currentPage === `/${urlPath[1]}/` ||
-  global.currentPage === `/${urlPath[1]}/index.html`
-) {
-  displayPopularMovies();
+if (urlHash === 'index.html') {
   highlightActiveLink();
+  sortVoteBtn();
+
+  voteBtnBigger.addEventListener('click', async function () {
+    const { results } = await fetchAPIData('movie/popular');
+    const movies = results.sort((a, b) => a.vote_count - b.vote_count);
+    popularMovies.innerHTML = '';
+    displayPopularMovies(movies);
+  });
+  voteBtnSmaller.addEventListener('click', async function () {
+    const { results } = await fetchAPIData('movie/popular');
+    const movies = results.sort((a, b) => b.vote_count - a.vote_count);
+    popularMovies.innerHTML = '';
+    displayPopularMovies(movies);
+  });
+  voteBtnShuffle.addEventListener('click', async function () {
+    const { results } = await fetchAPIData('movie/popular');
+    const movies = shuffle(results);
+    popularMovies.innerHTML = '';
+    displayPopularMovies(movies);
+  });
+  //
 }
 
 // Display 20 most popular movies
-export async function displayPopularMovies() {
-  const popularMovies = document.getElementById('popular-movies');
-  const { results } = await fetchAPIData('movie/popular');
-  results.map((movie) => {
+const popularMovies = document.getElementById('popular-movies');
+export async function displayPopularMovies(movies) {
+  // const { results } = await fetchAPIData('movie/popular');
+
+  movies.map((movie) => {
     return (popularMovies.innerHTML += `
     <div class="card">
       <a href="movie-details.html?id=${movie.id}">

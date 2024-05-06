@@ -13,6 +13,13 @@ export const global = {
   },
 };
 
+export const voteBtnSmaller = document.getElementById('vote-btn-smaller');
+export const voteBtnShuffle = document.getElementById('vote-btn-shuffle');
+export const voteBtnBigger = document.getElementById('vote-btn-bigger');
+
+const urlPath = global.currentPage.split('/', -2);
+export const urlHash = urlPath[urlPath.length - 1];
+
 export function showSpinner() {
   document.querySelector('.spinner').classList.add('show');
 }
@@ -23,15 +30,43 @@ export function hideSpinner() {
 
 // Highlight active link
 export function highlightActiveLink() {
-  const urlPath = global.currentPage.split('/', -2);
   const links = document.querySelectorAll('.nav-link');
-  console.log(urlPath[2]);
   links.forEach((link) => {
     if (
-      link.getAttribute('href') === urlPath[2] ||
-      urlPath[2].includes(link.dataset.link)
+      link.getAttribute('href') === urlHash ||
+      urlHash.includes(link.dataset.link)
     ) {
       link.classList.add('active');
     }
   });
+}
+
+export function sortVoteBtn() {
+  const btnVote = document.querySelectorAll('.btn-vote');
+  btnVote.forEach((button) => {
+    button.addEventListener('click', (e) => {
+      button.classList.remove('active');
+      btnVote.forEach((button) => button.classList.remove('active'));
+      e.target.classList.add('active');
+    });
+  });
+}
+
+/**
+ * @param {array} array
+ * @description shuffles arrays to randomize movie order
+ * @description Fisher-Yates
+ */
+export function shuffle(array) {
+  let currentIndex = array.length,
+    temporaryValue,
+    randomIndex;
+  while (currentIndex !== 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+  return array;
 }
