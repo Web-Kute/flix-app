@@ -6,18 +6,21 @@ import { displayShowDetails } from './show-details.js';
 import { search } from './search.js';
 import { global, highlightActiveLink, urlHash, shuffle } from './utils.js';
 
+async function awaitFetch(endpoint, type, displayCallBack) {
+  const { results } = await fetchAPIData(endpoint);
+  type = shuffle(results);
+  displayCallBack(type);
+}
+
 // Init App
 export async function init() {
   switch (urlHash) {
     case '/':
     case 'index.html':
-      const { results } = await fetchAPIData('movie/popular');
-      let movies = shuffle(results);
-      displayPopularMovies(movies);
+      awaitFetch('tv/popular', 'shows', displayPopularMovies);
       break;
     case 'shows.html':
-      // const { results } = await fetchAPIData('tv/popular');
-      // const shows = shuffle(results);
+      awaitFetch('tv/popular', 'shows', displayPopularShows);
       // displayPopularShows(shows);
       break;
     case '/movie-details.html':

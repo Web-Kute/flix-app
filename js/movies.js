@@ -35,9 +35,9 @@ if (urlHash === 'index.html') {
   //
 }
 
-// Display 20 most popular movies
 const popularMovies = document.getElementById('popular-movies');
-export async function displayPopularMovies(movies) {
+// Display 20 most popular movies
+export async function displayPopularMovies(movies = []) {
   // const { results } = await fetchAPIData('movie/popular');
 
   movies.map((movie) => {

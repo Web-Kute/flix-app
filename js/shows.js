@@ -11,7 +11,6 @@ import {
 } from './utils.js';
 
 if (urlHash === 'shows.html') {
-  displayPopularShows();
   highlightActiveLink();
   sortVoteBtn();
 
@@ -36,7 +35,7 @@ if (urlHash === 'shows.html') {
 }
 const popularShows = document.getElementById('popular-shows');
 // Display 20 most popular tv shows
-export async function displayPopularShows(shows) {
+export async function displayPopularShows(shows = []) {
   // const { results } = await fetchAPIData('tv/popular');
   shows.map((show) => {
     return (popularShows.innerHTML += `
