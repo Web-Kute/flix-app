@@ -76,7 +76,6 @@ function displaySearchResults(results) {
 
   radioType.addEventListener('change', () => selectTypeTv != selectTypeMovie);
 
-  // highLightMenu(global.search.type);
   // Clear previous results
   resultsContainer.innerHTML = '';
   searchResults.innerHTML = '';
@@ -93,7 +92,7 @@ function displaySearchResults(results) {
                 alt="${global.search.type === 'movie' ? result.title : result.name}"
               />`
           : `<img
-                src="../images/no-image.jpg"
+                src="./images/no-image.jpg"
                 class="card-img-top"
                 alt="${global.search.type === 'movie' ? result.title : result.name}"
               />`

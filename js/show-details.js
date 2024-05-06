@@ -91,5 +91,4 @@ export async function displayShowDetails(id) {
            .join(', ')}
         </p>
   </div>`;
-  // highLightMenu('tv');
 }

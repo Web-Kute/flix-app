@@ -1,19 +1,6 @@
 import { showSpinner, hideSpinner } from './utils.js';
+import { global } from './utils.js';
 
-export const global = {
-  currentPage: window.location.pathname,
-  search: {
-    term: '',
-    type: '',
-    page: 1,
-    totalPages: 1,
-    totalResults: 0,
-  },
-  api: {
-    key: 'f52b3a868de5d7fcd5533c09cd6598b9',
-    url: 'https://api.themoviedb.org/3/',
-  },
-};
 const options = {
   method: 'GET',
   headers: {
