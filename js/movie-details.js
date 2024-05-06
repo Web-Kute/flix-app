@@ -1,9 +1,9 @@
 import { fetchAPIData } from './fetchapi.js';
-import { global, highlightActiveLink } from './utils.js';
+import { highlightActiveLink, urlHash } from './utils.js';
 
 const movieId = window.location.search.split('id=')[1];
 
-if (global.currentPage.split('/')[2] === 'movie-details.html') {
+if (urlHash === 'movie-details.html') {
   displayMovieDetails(movieId);
   highlightActiveLink();
 }

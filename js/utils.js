@@ -41,11 +41,10 @@ export function highlightActiveLink() {
   });
 }
 
-export function sortVoteBtn() {
+export function highlightSortBtn() {
   const btnVote = document.querySelectorAll('.btn-vote');
   btnVote.forEach((button) => {
     button.addEventListener('click', (e) => {
-      button.classList.remove('active');
       btnVote.forEach((button) => button.classList.remove('active'));
       e.target.classList.add('active');
     });

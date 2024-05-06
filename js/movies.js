@@ -1,10 +1,9 @@
 import { fetchAPIData } from './fetchapi.js';
 import {
-  global,
   highlightActiveLink,
   shuffle,
   urlHash,
-  sortVoteBtn,
+  highlightSortBtn,
   voteBtnSmaller,
   voteBtnShuffle,
   voteBtnBigger,
@@ -12,7 +11,7 @@ import {
 
 if (urlHash === 'index.html') {
   highlightActiveLink();
-  sortVoteBtn();
+  highlightSortBtn();
 
   voteBtnBigger.addEventListener('click', async function () {
     const { results } = await fetchAPIData('movie/popular');

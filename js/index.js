@@ -9,7 +9,6 @@ import { global, highlightActiveLink, urlHash, shuffle } from './utils.js';
 async function awaitFetch(endpoint, type, displayCallBack) {
   const { results } = await fetchAPIData(endpoint);
   type = shuffle(results);
-console.log(type);
   displayCallBack(type);
 }
 
@@ -18,19 +17,18 @@ export async function init() {
   switch (urlHash) {
     case '/':
     case 'index.html':
-      awaitFetch('movies/popular', 'movies', displayPopularMovies);
+      awaitFetch('movie/popular', 'movies', displayPopularMovies);
       break;
     case 'shows.html':
       awaitFetch('tv/popular', 'shows', displayPopularShows);
-      // displayPopularShows(shows);
       break;
-    case '/movie-details.html':
+    case 'movie-details.html':
       // displayMovieDetails();
       break;
-    case '/tv-details.html':
+    case 'tv-details.html':
       // displayShowDetails();
       break;
-    case '/search.html':
+    case 'search.html':
       // search();
       break;
   }

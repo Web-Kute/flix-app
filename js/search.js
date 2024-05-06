@@ -2,7 +2,7 @@ import {
   global,
   showSpinner,
   hideSpinner,
-  highlightActiveLink,
+  urlHash,
 } from './utils.js';
 
 export async function searchAPIData() {
@@ -18,10 +18,8 @@ export async function searchAPIData() {
   return data;
 }
 
-const movieId = window.location.search.split('id=')[1];
-if (global.currentPage.split('/')[2] === 'search.html') {
+if (urlHash === 'search.html') {
   search();
-  highlightActiveLink();
 }
 
 export async function search() {
