@@ -36,7 +36,6 @@ if (urlHash === 'shows.html') {
 const popularShows = document.getElementById('popular-shows');
 // Display 20 most popular tv shows
 export async function displayPopularShows(shows = []) {
-  // const { results } = await fetchAPIData('tv/popular');
   shows.map((show) => {
     return (popularShows.innerHTML += `
     <div class="card">

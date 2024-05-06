@@ -32,14 +32,11 @@ if (urlHash === 'index.html') {
     popularMovies.innerHTML = '';
     displayPopularMovies(movies);
   });
-  //
 }
 
 const popularMovies = document.getElementById('popular-movies');
 // Display 20 most popular movies
 export async function displayPopularMovies(movies = []) {
-  // const { results } = await fetchAPIData('movie/popular');
-
   movies.map((movie) => {
     return (popularMovies.innerHTML += `
     <div class="card">
