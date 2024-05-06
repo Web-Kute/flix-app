@@ -1,4 +1,9 @@
-import { global, showSpinner, hideSpinner } from './index.js';
+import {
+  global,
+  showSpinner,
+  hideSpinner,
+  highlightActiveLink,
+} from './utils.js';
 
 export async function searchAPIData() {
   const API_KEY = global.api.key;
@@ -11,6 +16,12 @@ export async function searchAPIData() {
 
   hideSpinner();
   return data;
+}
+
+const movieId = window.location.search.split('id=')[1];
+if (global.currentPage.split('/')[2] === 'search.html') {
+  search();
+  highlightActiveLink();
 }
 
 export async function search() {
@@ -65,15 +76,7 @@ function displaySearchResults(results) {
 
   radioType.addEventListener('change', () => selectTypeTv != selectTypeMovie);
 
-  function hightLight() {
-    const links = document.querySelectorAll('.nav-link');
-    links.forEach((link) => {
-      link.dataset.link === global.search.type
-        ? link.classList.add('active')
-        : null;
-    });
-  }
-  hightLight();
+  // highLightMenu(global.search.type);
   // Clear previous results
   resultsContainer.innerHTML = '';
   searchResults.innerHTML = '';

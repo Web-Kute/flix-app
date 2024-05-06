@@ -1,4 +1,4 @@
-import { showSpinner, hideSpinner } from './index.js';
+import { showSpinner, hideSpinner } from './utils.js';
 
 export const global = {
   currentPage: window.location.pathname,

@@ -1,26 +1,15 @@
 import { fetchAPIData } from './fetchapi.js';
-export const global = {
-  currentPage: window.location.pathname,
-  search: {
-    term: '',
-    type: '',
-    page: 1,
-    totalPages: 1,
-    totalResults: 0,
-  },
-  api: {
-    key: 'f52b3a868de5d7fcd5533c09cd6598b9',
-    url: 'https://api.themoviedb.org/3/',
-  },
-};
+import { global, highlightActiveLink } from './utils.js';
 
-if(global.currentPage === '/shows.html') {
+const urlPath = global.currentPage.split('/', -2);
+
+if (global.currentPage.split('/', -1)[2] === 'shows.html') {
   displayPopularShows();
-
+  highlightActiveLink();
 }
 // Display 20 most popular tv shows
 export async function displayPopularShows() {
-const popularShows = document.getElementById('popular-shows');
+  const popularShows = document.getElementById('popular-shows');
   const { results } = await fetchAPIData('tv/popular');
   results.map((show) => {
     return (popularShows.innerHTML += `

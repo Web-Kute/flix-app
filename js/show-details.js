@@ -1,5 +1,11 @@
-import { hightLightMenu } from './index.js';
 import { fetchAPIData } from './fetchapi.js';
+import { global, highlightActiveLink } from './utils.js';
+
+const movieId = window.location.search.split('id=')[1];
+if (global.currentPage.split('/')[2] === 'tv-details.html') {
+  displayShowDetails(movieId);
+  highlightActiveLink();
+}
 
 export async function displayShowDetails(id) {
   const showId = window.location.search.split('id=')[1];
@@ -75,13 +81,15 @@ export async function displayShowDetails(id) {
       <li><span class="text-secondary">Status:</span> ${show.status}</li>
     </ul>
     <h3>Production Companies</h3>
-    <ul class="list-group">${show.production_companies.map((company) => `<li>${company.name}</li>`).join('')}</ul>
+      <p>${show.production_companies.map((company) => `<span>${company.name}</span>`).join(' / ')}</p>
+    
     <h3>Cast</h3>
-          ${cast
-            .map((casting) => {
-              return `<span>${casting.name}</span>`;
-            })
-            .join(', ')}
+         <p> ${cast
+           .map((casting) => {
+             return `<span>${casting.name}</span>`;
+           })
+           .join(', ')}
+        </p>
   </div>`;
-  hightLightMenu('tv');
+  // highLightMenu('tv');
 }

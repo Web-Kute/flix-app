@@ -1,12 +1,16 @@
-import { hightLightMenu } from './index.js';
 import { fetchAPIData } from './fetchapi.js';
+import { global, highlightActiveLink } from './utils.js';
+
+const movieId = window.location.search.split('id=')[1];
+
+if (global.currentPage.split('/')[2] === 'movie-details.html') {
+  displayMovieDetails(movieId);
+  highlightActiveLink();
+}
 
 export async function displayMovieDetails(id) {
-  const movieId = window.location.search.split('id=')[1];
-
   const movie = await fetchAPIData(`movie/${movieId}`);
   const { cast } = await fetchAPIData(`movie/${movieId}/credits`);
-
   // overlay details
   displayBackgroundImage('movie', movie.backdrop_path);
 
@@ -59,7 +63,7 @@ export async function displayMovieDetails(id) {
       <p>
         ${movie.overview}
       </p>
-      <h5>Genres</h5>
+      <h3>Genres</h3>
       <ul class="list-group">
         ${movie.genres.map((genre) => `<span>${genre.name}</span>`).join(', ')}
       </ul>
@@ -74,18 +78,16 @@ export async function displayMovieDetails(id) {
         <li><span class="text-secondary">Runtime:</span> ${movie.runtime} minutes</li>
         <li><span class="text-secondary">Status:</span> ${movie.status}</li>
       </ul>
-    <h4>Production Companies</h4>
-    <ul class="list-group">
-      ${movie.production_companies.map((company) => `<li>${company.name}</li>`).join('')}
-    </ul>
-    <h4>Cast</h4>
-      ${cast
-        .map((casting) => {
-          return `<span>${casting.name}</span>`;
-        })
-        .join(', ')}
+    <h3>Production Companies: </h3>
+     <p> ${movie.production_companies.map((company) => `<span>${company.name}</span>`).join(' / ')}</p>
+    <h3>Cast: </h3>
+     <p> ${cast
+       .map((casting) => {
+         return `<span>${casting.name}</span>`;
+       })
+       .join(', ')}
+    </p>
   </div>`;
-  hightLightMenu('movie');
 }
 
 function numberWithCommas(x) {
