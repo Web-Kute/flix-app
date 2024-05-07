@@ -17,6 +17,8 @@ export const voteBtnSmaller = document.getElementById('vote-btn-smaller');
 export const voteBtnShuffle = document.getElementById('vote-btn-shuffle');
 export const voteBtnBigger = document.getElementById('vote-btn-bigger');
 
+export const reloadShowsPageBtn = document.getElementById('reload-shows-page');
+
 const urlPath = global.currentPage.split('/', -2);
 export const urlHash = urlPath[urlPath.length - 1];
 
@@ -68,4 +70,15 @@ export function shuffle(array) {
     array[randomIndex] = temporaryValue;
   }
   return array;
+}
+
+export const navMoviesSort = document.getElementById('movies-sort');
+export const navShowsSort = document.getElementById('shows-sort');
+
+export function addReloadBtn(nav, type, name) {
+    const button = document.createElement('button');
+    button.id = `reload-${type}-btn`;
+    button.className = 'btn';
+    button.innerText = `Reload ${name}`;
+    nav.appendChild(button);
 }

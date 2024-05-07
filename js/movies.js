@@ -7,6 +7,8 @@ import {
   voteBtnSmaller,
   voteBtnShuffle,
   voteBtnBigger,
+  addReloadBtn,
+  navMoviesSort,
 } from './utils.js';
 
 if (urlHash === '' || urlHash === 'index.html') {
@@ -36,6 +38,12 @@ if (urlHash === '' || urlHash === 'index.html') {
 const popularMovies = document.getElementById('popular-movies');
 // Display 20 most popular movies
 export async function displayPopularMovies(movies = []) {
+  popularMovies.innerHTML = '';
+  const reloadMoviesBtn = document.getElementById('reload-movies-btn');
+  reloadMoviesBtn === null
+    ? addReloadBtn(navMoviesSort, 'movies', 'Movies')
+    : null;
+
   movies.map((movie) => {
     return (popularMovies.innerHTML += `
     <div class="card">

@@ -7,6 +7,8 @@ import {
   voteBtnSmaller,
   voteBtnShuffle,
   voteBtnBigger,
+  addReloadBtn,
+  navShowsSort,
 } from './utils.js';
 
 if (urlHash === 'shows.html') {
@@ -35,6 +37,11 @@ if (urlHash === 'shows.html') {
 const popularShows = document.getElementById('popular-shows');
 // Display 20 most popular tv shows
 export async function displayPopularShows(shows = []) {
+  popularShows.innerHTML = '';
+
+  const reloadShowsBtn = document.getElementById('reload-shows-btn');
+  reloadShowsBtn === null ? addReloadBtn(navShowsSort, 'shows', 'Shows') : null;
+
   shows.map((show) => {
     return (popularShows.innerHTML += `
     <div class="card">
