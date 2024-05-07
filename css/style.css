@@ -397,12 +397,12 @@ label {
   .details-top img {
     width: 100%;
   }
-}
-
-@media screen and (min-width: 600px) and (max-width: 767px) {
   .search {
     padding: 0;
   }
+}
+
+@media screen and (min-width: 600px) and (max-width: 767px) {
   .details-top {
     display: block;
     margin-bottom: 40px;
