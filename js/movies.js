@@ -9,7 +9,7 @@ import {
   voteBtnBigger,
 } from './utils.js';
 
-if (urlHash === 'index.html') {
+if (urlHash === '' || urlHash === 'index.html') {
   highlightActiveLink();
   highlightSortBtn();
 

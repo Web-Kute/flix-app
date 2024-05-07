@@ -43,7 +43,6 @@ button:focus-visible {
 }
 
 nav {
-  width: 40%;
   display: flex;
   justify-content: space-around;
   margin: 20px auto;
@@ -258,15 +257,6 @@ section h2 {
   margin: 50px 0 30px;
 }
 
-@media (max-width: 700px) {
-  .details-top {
-    display: block;
-    margin-bottom: 40px;
-    padding-bottom: 20px;
-    border-bottom: #ccc solid 1px;
-  }
-}
-
 .details-top img {
   width: 400px;
   height: 100%;
@@ -390,4 +380,35 @@ label {
 
 .alert-warning {
   background: tomato;
+}
+
+@media screen and (max-width: 599px) {
+  nav {
+    width: 100%;
+    flex-direction: column;
+  }
+  nav button {
+    margin-bottom: 5px;
+  }
+}
+
+@media screen and (min-width: 600px) and (max-width: 767px) {
+  .search {
+    padding: 0;
+  }
+  .details-top {
+    display: block;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: #ccc solid 1px;
+  }
+  .details-top img {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  nav {
+    width: 60%;
+  }
 }

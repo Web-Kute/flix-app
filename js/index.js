@@ -15,7 +15,7 @@ async function awaitFetch(endpoint, type, displayCallBack) {
 // Init App
 export async function init() {
   switch (urlHash) {
-    case '/':
+    case '':
     case 'index.html':
       awaitFetch('movie/popular', 'movies', displayPopularMovies);
       break;
