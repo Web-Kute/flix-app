@@ -1,12 +1,11 @@
 import { fetchAPIData } from './fetchapi.js';
 import {
   highlightActiveLink,
-  shuffle,
   urlHash,
   highlightSortBtn,
-  voteBtnSmaller,
-  voteBtnShuffle,
-  voteBtnBigger,
+  descVoteBtn,
+  ascVoteBtn,
+  shuffleVoteBtn,
   addReloadBtn,
   navShowsSort,
 } from './utils.js';
@@ -15,19 +14,19 @@ if (urlHash === 'shows.html') {
   highlightActiveLink();
   highlightSortBtn();
 
-  voteBtnBigger.addEventListener('click', async function () {
+  ascVoteBtn.addEventListener('click', async function () {
     const { results } = await fetchAPIData('tv/popular');
     const shows = results.sort((a, b) => a.vote_count - b.vote_count);
     popularShows.innerHTML = '';
     displayPopularShows(shows);
   });
-  voteBtnSmaller.addEventListener('click', async function () {
+  descVoteBtn.addEventListener('click', async function () {
     const { results } = await fetchAPIData('tv/popular');
     const shows = results.sort((a, b) => b.vote_count - a.vote_count);
     popularShows.innerHTML = '';
     displayPopularShows(shows);
   });
-  voteBtnShuffle.addEventListener('click', async function () {
+  shuffleVoteBtn.addEventListener('click', async function () {
     const { results } = await fetchAPIData('tv/popular');
     const shows = shuffle(results);
     popularShows.innerHTML = '';

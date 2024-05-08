@@ -1,12 +1,12 @@
 import { fetchAPIData } from './fetchapi.js';
+import { shuffle } from './shuffle.js';
 import {
   highlightActiveLink,
-  shuffle,
   urlHash,
   highlightSortBtn,
-  voteBtnSmaller,
-  voteBtnShuffle,
-  voteBtnBigger,
+  descVoteBtn,
+  ascVoteBtn,
+  shuffleVoteBtn,
   addReloadBtn,
   navMoviesSort,
 } from './utils.js';
@@ -14,38 +14,21 @@ import {
 if (urlHash === '' || urlHash === 'index.html') {
   highlightActiveLink();
   highlightSortBtn();
-
-  voteBtnBigger.addEventListener('click', async function () {
-    const { results } = await fetchAPIData('movie/popular');
-    const movies = results.sort((a, b) => a.vote_count - b.vote_count);
-    popularMovies.innerHTML = '';
-    displayPopularMovies(movies);
-  });
-  voteBtnSmaller.addEventListener('click', async function () {
-    const { results } = await fetchAPIData('movie/popular');
-    const movies = results.sort((a, b) => b.vote_count - a.vote_count);
-    popularMovies.innerHTML = '';
-    displayPopularMovies(movies);
-  });
-  voteBtnShuffle.addEventListener('click', async function () {
-    const { results } = await fetchAPIData('movie/popular');
-    const movies = shuffle(results);
-    popularMovies.innerHTML = '';
-    displayPopularMovies(movies);
-  });
 }
 
 const popularMovies = document.getElementById('popular-movies');
 // Display 20 most popular movies
-export async function displayPopularMovies(movies = []) {
+export async function displayPopularMovies(movies = [], page) {
+  const { results } = await fetchAPIData('movie/popular', page);
   popularMovies.innerHTML = '';
   const reloadMoviesBtn = document.getElementById('reload-movies-btn');
   reloadMoviesBtn === null
     ? addReloadBtn(navMoviesSort, 'movies', 'Movies')
     : null;
 
-  movies.map((movie) => {
-    return (popularMovies.innerHTML += `
+  function displayMovies() {
+    movies.map((movie) => {
+      return (popularMovies.innerHTML += `
     <div class="card">
       <a href="movie-details.html?id=${movie.id}">
       ${
@@ -70,5 +53,26 @@ export async function displayPopularMovies(movies = []) {
         </p>
       </div>
     </div>`);
+    });
+  }
+
+  displayMovies();
+
+  ascVoteBtn.addEventListener('click', () => {
+    movies = results.sort((a, b) => a.vote_count - b.vote_count);
+    popularMovies.innerHTML = '';
+    displayMovies();
+  });
+
+  descVoteBtn.addEventListener('click', () => {
+    movies = results.sort((a, b) => b.vote_count - a.vote_count);
+    popularMovies.innerHTML = '';
+    displayMovies();
+  });
+
+  shuffleVoteBtn.addEventListener('click', () => {
+    movies = shuffle(results);
+    popularMovies.innerHTML = '';
+    displayMovies();
   });
 }

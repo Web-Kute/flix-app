@@ -13,10 +13,9 @@ export const global = {
   },
 };
 
-export const voteBtnSmaller = document.getElementById('vote-btn-smaller');
-export const voteBtnShuffle = document.getElementById('vote-btn-shuffle');
-export const voteBtnBigger = document.getElementById('vote-btn-bigger');
-
+export const descVoteBtn = document.getElementById('desc-vote-btn');
+export const shuffleVoteBtn = document.getElementById('shuffle-vote-btn');
+export const ascVoteBtn = document.getElementById('asc-vote-btn');
 export const reloadShowsPageBtn = document.getElementById('reload-shows-page');
 
 const urlPath = global.currentPage.split('/', -2);
@@ -58,19 +57,19 @@ export function highlightSortBtn() {
  * @description shuffles arrays to randomize movie order
  * @description Fisher-Yates
  */
-export function shuffle(array) {
-  let currentIndex = array.length,
-    temporaryValue,
-    randomIndex;
-  while (currentIndex !== 0) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
-  return array;
-}
+// export function shuffle(array) {
+//   let currentIndex = array.length,
+//     temporaryValue,
+//     randomIndex;
+//   while (currentIndex !== 0) {
+//     randomIndex = Math.floor(Math.random() * currentIndex);
+//     currentIndex -= 1;
+//     temporaryValue = array[currentIndex];
+//     array[currentIndex] = array[randomIndex];
+//     array[randomIndex] = temporaryValue;
+//   }
+//   return array;
+// }
 
 export const navMoviesSort = document.getElementById('movies-sort');
 export const navShowsSort = document.getElementById('shows-sort');

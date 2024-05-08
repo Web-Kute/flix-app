@@ -1,4 +1,4 @@
-import { fetchAPIData } from './fetchapi.js';
+import { fetchAPIData, page } from './fetchapi.js';
 import { displayPopularMovies } from './movies.js';
 import { displayPopularShows } from './shows.js';
 import { displayMovieDetails } from './movie-details.js';
@@ -7,27 +7,28 @@ import { search } from './search.js';
 import {
   highlightActiveLink,
   urlHash,
-  shuffle,
   navMoviesSort,
   navShowsSort,
 } from './utils.js';
 
-async function awaitFetch(endpoint, type, displayCallBack) {
-  const { results } = await fetchAPIData(endpoint);
-  type = shuffle(results);
-  displayCallBack(type);
+async function awaitFetch(endpoint, type, displayCallBack, page) {
+  const { results } = await fetchAPIData(endpoint, page);
+  type = results;
+  displayCallBack(type, page);
 }
 
 async function reloadMoviesPage() {
-  const { results } = await fetchAPIData('movie/popular');
+  const page = Math.floor(Math.random() * 400) + 1;
+  const { results } = await fetchAPIData('movie/popular', page);
   let movies = results;
-  displayPopularMovies(movies);
+  displayPopularMovies(movies, page);
 }
 
 async function reloadShowsPage() {
-  const { results } = await fetchAPIData('tv/popular');
+  const page = Math.floor(Math.random() * 200) + 1;
+  const { results } = await fetchAPIData('tv/popular', page);
   let shows = results;
-  displayPopularShows(shows);
+  displayPopularShows(shows, page);
 }
 
 // Init App
@@ -35,7 +36,8 @@ export async function init() {
   switch (urlHash) {
     case '':
     case 'index.html':
-      awaitFetch('movie/popular', 'movies', displayPopularMovies);
+      let page = Math.floor(Math.random() * 400) + 1;
+      awaitFetch('movie/popular', 'movies', displayPopularMovies, page);
       navMoviesSort.addEventListener('click', (e) => {
         if (e.target.id === 'reload-movies-btn') {
           reloadMoviesPage();
@@ -43,7 +45,8 @@ export async function init() {
       });
       break;
     case 'shows.html':
-      awaitFetch('tv/popular', 'shows', displayPopularShows);
+      page = Math.floor(Math.random() * 200) + 1;
+      awaitFetch('tv/popular', 'shows', displayPopularShows, page);
       navShowsSort.addEventListener('click', (e) => {
         if (e.target.id === 'reload-shows-btn') {
           reloadShowsPage();

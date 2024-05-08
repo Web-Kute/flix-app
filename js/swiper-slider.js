@@ -1,7 +1,8 @@
 import { fetchAPIData } from './fetchapi.js';
 
 export async function displaySlider() {
-  const { results } = await fetchAPIData('movie/now_playing');
+const page = 1;
+  const { results } = await fetchAPIData('movie/now_playing', page);
 
   const slider = document.querySelector('.swiper-wrapper');
 
