@@ -9,8 +9,8 @@ if (urlHash === 'movie-details.html') {
 }
 
 export async function displayMovieDetails(id) {
-  const movie = await fetchAPIData(`movie/${movieId}`);
-  const { cast } = await fetchAPIData(`movie/${movieId}/credits`);
+  const movie = await fetchAPIData(`movie/${movieId}`, 1);
+  const { cast } = await fetchAPIData(`movie/${movieId}/credits`, 1);
   // overlay details
   displayBackgroundImage('movie', movie.backdrop_path);
 

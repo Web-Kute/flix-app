@@ -1,4 +1,4 @@
-import { fetchAPIData } from './fetchapi.js';
+import { fetchAPIData, page } from './fetchapi.js';
 import { shuffle } from './shuffle.js';
 import {
   highlightActiveLink,
@@ -74,5 +74,15 @@ export async function displayPopularMovies(movies = [], page) {
     movies = shuffle(results);
     popularMovies.innerHTML = '';
     displayMovies();
+  });
+
+  navMoviesSort.addEventListener('click', async (e) => {
+    if (e.target.id === 'reload-movies-btn') {
+      page = Math.floor(Math.random() * 400);
+      const { results } = await fetchAPIData('movie/popular', page);
+      movies = results;
+      popularMovies.innerHTML = '';
+      displayMovies();
+    }
   });
 }

@@ -17,41 +17,33 @@ async function awaitFetch(endpoint, type, displayCallBack, page) {
   displayCallBack(type, page);
 }
 
-async function reloadMoviesPage() {
-  const page = Math.floor(Math.random() * 400) + 1;
-  const { results } = await fetchAPIData('movie/popular', page);
-  let movies = results;
-  displayPopularMovies(movies, page);
-}
-
-async function reloadShowsPage() {
-  const page = Math.floor(Math.random() * 200) + 1;
-  const { results } = await fetchAPIData('tv/popular', page);
-  let shows = results;
-  displayPopularShows(shows, page);
-}
+// async function reloadShowsPage() {
+//   const page = Math.floor(Math.random() * 200) + 1;
+//   const { results } = await fetchAPIData('tv/popular', page);
+//   let shows = results;
+//   displayPopularShows(shows, page);
+// }
 
 // Init App
 export async function init() {
+  const page = Math.floor(Math.random() * 400) + 1;
   switch (urlHash) {
     case '':
     case 'index.html':
-      let page = Math.floor(Math.random() * 400) + 1;
       awaitFetch('movie/popular', 'movies', displayPopularMovies, page);
-      navMoviesSort.addEventListener('click', (e) => {
-        if (e.target.id === 'reload-movies-btn') {
-          reloadMoviesPage();
-        }
-      });
+      // navMoviesSort.addEventListener('click', (e) => {
+      //   if (e.target.id === 'reload-movies-btn') {
+      //     reloadMoviesPage();
+      //   }
+      // });
       break;
     case 'shows.html':
-      page = Math.floor(Math.random() * 200) + 1;
       awaitFetch('tv/popular', 'shows', displayPopularShows, page);
-      navShowsSort.addEventListener('click', (e) => {
-        if (e.target.id === 'reload-shows-btn') {
-          reloadShowsPage();
-        }
-      });
+      // navShowsSort.addEventListener('click', (e) => {
+      //   if (e.target.id === 'reload-shows-btn') {
+      //     reloadShowsPage();
+      //   }
+      // });
       break;
     case 'movie-details.html':
       // displayMovieDetails();

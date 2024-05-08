@@ -1,8 +1,8 @@
 import { fetchAPIData } from './fetchapi.js';
-import { global, highlightActiveLink } from './utils.js';
+import { urlHash, highlightActiveLink } from './utils.js';
 
 const movieId = window.location.search.split('id=')[1];
-if (global.currentPage.split('/')[2] === 'tv-details.html') {
+if (urlHash === 'tv-details.html') {
   displayShowDetails(movieId);
   highlightActiveLink();
 }
@@ -10,8 +10,8 @@ if (global.currentPage.split('/')[2] === 'tv-details.html') {
 export async function displayShowDetails(id) {
   const showId = window.location.search.split('id=')[1];
 
-  const show = await fetchAPIData(`tv/${showId}`);
-  const { cast } = await fetchAPIData(`tv/${showId}/credits`);
+  const show = await fetchAPIData(`tv/${showId}`, 1);
+  const { cast } = await fetchAPIData(`tv/${showId}/credits`, 1);
 
   // overlay details
   displayBackgroundImage('show', show.backdrop_path);
