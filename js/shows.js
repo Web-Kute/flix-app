@@ -75,7 +75,7 @@ export async function displayPopularShows(shows = [], page) {
   });
 
   navShowsSort.addEventListener('click', async (e) => {
-    if (e.target.id === 'reload-movies-btn') {
+    if (e.target.id === 'reload-shows-btn') {
       page = Math.floor(Math.random() * 400);
       const { results } = await fetchAPIData('tv/popular', page);
       shows = results;

@@ -10,7 +10,7 @@ const options = {
   },
 };
 
-export let page = Math.floor(Math.random() * 200);
+export let page = Math.floor(Math.random() * 400);
 // Fetch data from TMDB API
 export async function fetchAPIData(endpoint, page) {
   const API_KEY = global.api.key;

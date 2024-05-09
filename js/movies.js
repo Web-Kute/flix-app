@@ -1,5 +1,6 @@
 import { fetchAPIData, page } from './fetchapi.js';
 import { shuffle } from './shuffle.js';
+import { init } from './index.js';
 import {
   highlightActiveLink,
   urlHash,
@@ -58,31 +59,29 @@ export async function displayPopularMovies(movies = [], page) {
 
   displayMovies();
 
-  ascVoteBtn.addEventListener('click', () => {
-    movies = results.sort((a, b) => a.vote_count - b.vote_count);
-    popularMovies.innerHTML = '';
-    displayMovies();
-  });
-
-  descVoteBtn.addEventListener('click', () => {
-    movies = results.sort((a, b) => b.vote_count - a.vote_count);
-    popularMovies.innerHTML = '';
-    displayMovies();
-  });
-
-  shuffleVoteBtn.addEventListener('click', () => {
-    movies = shuffle(results);
-    popularMovies.innerHTML = '';
-    displayMovies();
-  });
-
   navMoviesSort.addEventListener('click', async (e) => {
-    if (e.target.id === 'reload-movies-btn') {
-      page = Math.floor(Math.random() * 400);
-      const { results } = await fetchAPIData('movie/popular', page);
-      movies = results;
-      popularMovies.innerHTML = '';
-      displayMovies();
+    popularMovies.innerHTML = '';
+    if (e.target.tagName === 'BUTTON') {
+      switch (e.target.dataset.vote) {
+        case 'Decreasing':
+          movies = results.sort((a, b) => b.vote_count - a.vote_count);
+          break;
+        case 'Ascending':
+          movies = results.sort((a, b) => a.vote_count - b.vote_count);
+          break;
+        case 'Shuffle':
+          movies = shuffle(results);
+          break;
+        case 'Reload':
+          init();
+          shuffleVoteBtn.classList.add('active');
+          ascVoteBtn.classList.remove('active');
+          descVoteBtn.classList.remove('active');
+          movies = results;
+        default:
+          break;
+      }
     }
+    displayMovies();
   });
 }

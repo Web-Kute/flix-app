@@ -17,6 +17,7 @@ export const descVoteBtn = document.getElementById('desc-vote-btn');
 export const shuffleVoteBtn = document.getElementById('shuffle-vote-btn');
 export const ascVoteBtn = document.getElementById('asc-vote-btn');
 export const reloadShowsPageBtn = document.getElementById('reload-shows-page');
+export const backBtn = document.getElementById('back-btn');
 
 const urlPath = global.currentPage.split('/', -2);
 export const urlHash = urlPath[urlPath.length - 1];
@@ -56,9 +57,10 @@ export const navMoviesSort = document.getElementById('movies-sort');
 export const navShowsSort = document.getElementById('shows-sort');
 
 export function addReloadBtn(nav, type, name) {
-    const button = document.createElement('button');
-    button.id = `reload-${type}-btn`;
-    button.className = 'btn';
-    button.innerText = `Reload ${name}`;
-    nav.appendChild(button);
+  const button = document.createElement('button');
+  button.id = `reload-${type}-btn`;
+  button.className = 'btn';
+  button.innerText = `Reload ${name}`;
+  button.dataset.vote = 'Reload';
+  nav.appendChild(button);
 }
