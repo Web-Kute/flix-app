@@ -17,13 +17,6 @@ async function awaitFetch(endpoint, type, displayCallBack, page) {
   displayCallBack(type, page);
 }
 
-// async function reloadShowsPage() {
-//   const page = Math.floor(Math.random() * 200) + 1;
-//   const { results } = await fetchAPIData('tv/popular', page);
-//   let shows = results;
-//   displayPopularShows(shows, page);
-// }
-
 // Init App
 export async function init() {
   const page = Math.floor(Math.random() * 400) + 1;
@@ -31,28 +24,15 @@ export async function init() {
     case '':
     case 'index.html':
       awaitFetch('movie/popular', 'movies', displayPopularMovies, page);
-      // navMoviesSort.addEventListener('click', (e) => {
-      //   if (e.target.id === 'reload-movies-btn') {
-      //     reloadMoviesPage();
-      //   }
-      // });
       break;
     case 'shows.html':
       awaitFetch('tv/popular', 'shows', displayPopularShows, page);
-      // navShowsSort.addEventListener('click', (e) => {
-      //   if (e.target.id === 'reload-shows-btn') {
-      //     reloadShowsPage();
-      //   }
-      // });
       break;
     case 'movie-details.html':
-      // displayMovieDetails();
       break;
     case 'tv-details.html':
-      // displayShowDetails();
       break;
     case 'search.html':
-      // search();
       break;
   }
   highlightActiveLink();
