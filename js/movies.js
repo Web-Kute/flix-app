@@ -77,7 +77,6 @@ export async function displayPopularMovies(movies = [], page) {
           shuffleVoteBtn.classList.add('active');
           ascVoteBtn.classList.remove('active');
           descVoteBtn.classList.remove('active');
-          movies = results;
         default:
           break;
       }

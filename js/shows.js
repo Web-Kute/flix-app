@@ -1,5 +1,6 @@
 import { fetchAPIData } from './fetchapi.js';
 import { shuffle } from './shuffle.js';
+import { init } from './index.js';
 import {
   highlightActiveLink,
   urlHash,
@@ -56,31 +57,28 @@ export async function displayPopularShows(shows = [], page) {
 
   displayShows();
 
-  ascVoteBtn.addEventListener('click', () => {
-    shows = results.sort((a, b) => a.vote_count - b.vote_count);
-    popularShows.innerHTML = '';
-    displayShows();
-  });
-
-  descVoteBtn.addEventListener('click', () => {
-    shows = results.sort((a, b) => b.vote_count - a.vote_count);
-    popularShows.innerHTML = '';
-    displayShows();
-  });
-
-  shuffleVoteBtn.addEventListener('click', () => {
-    shows = shuffle(results);
-    popularShows.innerHTML = '';
-    displayShows();
-  });
-
   navShowsSort.addEventListener('click', async (e) => {
-    if (e.target.id === 'reload-shows-btn') {
-      page = Math.floor(Math.random() * 400);
-      const { results } = await fetchAPIData('tv/popular', page);
-      shows = results;
-      popularShows.innerHTML = '';
-      displayShows();
+    popularShows.innerHTML = '';
+    if (e.target.tagName === 'BUTTON') {
+      switch (e.target.dataset.vote) {
+        case 'Decreasing':
+          shows = results.sort((a, b) => b.vote_count - a.vote_count);
+          break;
+        case 'Ascending':
+          shows = results.sort((a, b) => a.vote_count - b.vote_count);
+          break;
+        case 'Shuffle':
+          shows = shuffle(results);
+          break;
+        case 'Reload':
+          init();
+          shuffleVoteBtn.classList.add('active');
+          ascVoteBtn.classList.remove('active');
+          descVoteBtn.classList.remove('active');
+        default:
+          break;
+      }
     }
+    displayShows();
   });
 }
